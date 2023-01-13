@@ -1,0 +1,115 @@
+2022-11-24 13:40:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOLETO" not found (this database is empty); SQL statement:
+insert into boleto (id, amount, bank_reference, bar_code, currency, date, document_reference, due_date, external_reference, paid_amount, paid_date, state) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [42104-214]
+2022-11-24 13:43:11 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Boleto(\000d\000aid int [*]primary_key auto_increament, \000d\000aamount float, \000d\000abank_reference varchar(30),\000d\000a bar_code varchar(30),\000d\000a currency varchar(30),\000d\000a date Date,\000d\000a document_reference varchar(30), \000d\000adue_date Date,\000d\000a external_reference varchar(30), \000d\000apaid_amount float, \000d\000apaid_date Date,\000d\000a state varchar(10)\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, NULL, AS, DEFAULT, GENERATED, ON UPDATE, NOT NULL, NULL, AUTO_INCREMENT, DEFAULT ON NULL, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+create table Boleto(
+id int primary_key auto_increament, 
+amount float, 
+bank_reference varchar(30),
+ bar_code varchar(30),
+ currency varchar(30),
+ date Date,
+ document_reference varchar(30), 
+due_date Date,
+ external_reference varchar(30), 
+paid_amount float, 
+paid_date Date,
+ state varchar(10)
+) [42001-214]
+2022-11-24 13:43:26 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Boleto(\000d\000aid int primary key [*]auto_increament, \000d\000aamount float, \000d\000abank_reference varchar(30),\000d\000a bar_code varchar(30),\000d\000a currency varchar(30),\000d\000a date Date,\000d\000a document_reference varchar(30), \000d\000adue_date Date,\000d\000a external_reference varchar(30), \000d\000apaid_amount float, \000d\000apaid_date Date,\000d\000a state varchar(10)\000d\000a)"; expected "HASH, CONSTRAINT, COMMENT, UNIQUE, NOT NULL, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+create table Boleto(
+id int primary key auto_increament, 
+amount float, 
+bank_reference varchar(30),
+ bar_code varchar(30),
+ currency varchar(30),
+ date Date,
+ document_reference varchar(30), 
+due_date Date,
+ external_reference varchar(30), 
+paid_amount float, 
+paid_date Date,
+ state varchar(10)
+) [42001-214]
+2022-11-24 13:44:26 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Boleto(\000d\000aid int primary key [*]auto_increament, \000d\000aamount float, \000d\000abank_reference varchar(30),\000d\000a bar_code varchar(30),\000d\000a currency varchar(30),\000d\000a date Date,\000d\000a document_reference varchar(30), \000d\000adue_date Date,\000d\000a external_reference varchar(30), \000d\000apaid_amount float, \000d\000apaid_date Date,\000d\000a state vac\000d\000a)"; expected "HASH, CONSTRAINT, COMMENT, UNIQUE, NOT NULL, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+create table Boleto(
+id int primary key auto_increament, 
+amount float, 
+bank_reference varchar(30),
+ bar_code varchar(30),
+ currency varchar(30),
+ date Date,
+ document_reference varchar(30), 
+due_date Date,
+ external_reference varchar(30), 
+paid_amount float, 
+paid_date Date,
+ state vac
+) [42001-214]
+2022-11-24 13:44:27 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Boleto(\000d\000aid int primary key [*]auto_increament, \000d\000aamount float, \000d\000abank_reference varchar(30),\000d\000a bar_code varchar(30),\000d\000a currency varchar(30),\000d\000a date Date,\000d\000a document_reference varchar(30), \000d\000adue_date Date,\000d\000a external_reference varchar(30), \000d\000apaid_amount float, \000d\000apaid_date Date,\000d\000a state vac\000d\000a)"; expected "HASH, CONSTRAINT, COMMENT, UNIQUE, NOT NULL, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+create table Boleto(
+id int primary key auto_increament, 
+amount float, 
+bank_reference varchar(30),
+ bar_code varchar(30),
+ currency varchar(30),
+ date Date,
+ document_reference varchar(30), 
+due_date Date,
+ external_reference varchar(30), 
+paid_amount float, 
+paid_date Date,
+ state vac
+) [42001-214]
+2022-11-24 13:44:27 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Boleto(\000d\000aid int primary key [*]auto_increament, \000d\000aamount float, \000d\000abank_reference varchar(30),\000d\000a bar_code varchar(30),\000d\000a currency varchar(30),\000d\000a date Date,\000d\000a document_reference varchar(30), \000d\000adue_date Date,\000d\000a external_reference varchar(30), \000d\000apaid_amount float, \000d\000apaid_date Date,\000d\000a state vac\000d\000a)"; expected "HASH, CONSTRAINT, COMMENT, UNIQUE, NOT NULL, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+create table Boleto(
+id int primary key auto_increament, 
+amount float, 
+bank_reference varchar(30),
+ bar_code varchar(30),
+ currency varchar(30),
+ date Date,
+ document_reference varchar(30), 
+due_date Date,
+ external_reference varchar(30), 
+paid_amount float, 
+paid_date Date,
+ state vac
+) [42001-214]
+2022-11-24 13:44:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Boleto(\000d\000aid int primary key [*]auto_increament, \000d\000aamount float, \000d\000abank_reference varchar(30),\000d\000a bar_code varchar(30),\000d\000a currency varchar(30),\000d\000a date Date,\000d\000a document_reference varchar(30), \000d\000adue_date Date,\000d\000a external_reference varchar(30), \000d\000apaid_amount float, \000d\000apaid_date Date,\000d\000a state varchar(10)\000d\000a)"; expected "HASH, CONSTRAINT, COMMENT, UNIQUE, NOT NULL, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+create table Boleto(
+id int primary key auto_increament, 
+amount float, 
+bank_reference varchar(30),
+ bar_code varchar(30),
+ currency varchar(30),
+ date Date,
+ document_reference varchar(30), 
+due_date Date,
+ external_reference varchar(30), 
+paid_amount float, 
+paid_date Date,
+ state varchar(10)
+) [42001-214]
+2022-11-24 13:46:11 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Boleto(\000d\000aid int primary key [*]auto_increament, \000d\000aamount float, \000d\000abank_reference varchar(30),\000d\000a bar_code varchar(30),\000d\000a currency varchar(30),\000d\000a date timestamp default current_timestamp not null,\000d\000a document_reference varchar(30), \000d\000adue_date timestamp default current_timestamp not null,\000d\000a external_reference varchar(30), \000d\000apaid_amount float, \000d\000apaid_date timestamp default current_timestamp not null,\000d\000a state varchar(10)\000d\000a)"; expected "HASH, CONSTRAINT, COMMENT, UNIQUE, NOT NULL, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+create table Boleto(
+id int primary key auto_increament, 
+amount float, 
+bank_reference varchar(30),
+ bar_code varchar(30),
+ currency varchar(30),
+ date timestamp default current_timestamp not null,
+ document_reference varchar(30), 
+due_date timestamp default current_timestamp not null,
+ external_reference varchar(30), 
+paid_amount float, 
+paid_date timestamp default current_timestamp not null,
+ state varchar(10)
+) [42001-214]
