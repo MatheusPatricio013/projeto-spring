@@ -20,7 +20,7 @@ public class CalculateInvoice {
         if(salesOrder.getAmount().doubleValue() - valueInvoiced < salesOrder.getAmount().doubleValue()){
          Double returnCredit = obligor.getCreditLimit().doubleValue();
          obligor.setCreditLimit(BigDecimal.valueOf(returnCredit));
-            System.out.println("Valor estornado: R$ "+valueInvoiced);
+            System.out.println("Value returned: R$ "+valueInvoiced);
         }
 
     }
