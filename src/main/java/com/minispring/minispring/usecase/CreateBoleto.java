@@ -3,8 +3,9 @@ package com.minispring.minispring.usecase;
 import com.minispring.minispring.model.Boleto;
 import com.minispring.minispring.model.BoletoState;
 import com.minispring.minispring.model.NegotiableInstrument;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class CreateBoleto extends Boleto{
    public Boleto execute(NegotiableInstrument negotiableInstrument){
 
