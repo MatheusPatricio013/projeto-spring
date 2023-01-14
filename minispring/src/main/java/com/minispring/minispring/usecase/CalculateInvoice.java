@@ -2,11 +2,12 @@ package com.minispring.minispring.usecase;
 
 import com.minispring.minispring.model.InstructionInvolvement;
 import com.minispring.minispring.model.SalesOrder;
+import org.springframework.stereotype.Service;
 
 
 import java.math.BigDecimal;
 
-
+@Service
 public class CalculateInvoice {
 
     public void execute(Double valueInvoiced, InstructionInvolvement obligor, SalesOrder salesOrder){
