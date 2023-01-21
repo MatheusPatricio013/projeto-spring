@@ -1,10 +1,12 @@
-package com.minispring.minispring.model;
+package com.minispring.minispring.usecase;
 import com.minispring.minispring.exception.ValueGreaterThanAmountException;
+import com.minispring.minispring.model.InvoiceSalesOrderAssociation;
+import com.minispring.minispring.model.SalesOrder;
 
 import java.util.Set;
 
 public class AddInvoiceSalesOrderAssociation {
-    public void execute(Set<InvoiceSalesOrderAssociation> associations,Set<SalesOrder> salesOrders,InvoiceSalesOrderAssociation association, SalesOrder salesOrder, Double value){
+    public void execute(Set<InvoiceSalesOrderAssociation> associations, Set<SalesOrder> salesOrders, InvoiceSalesOrderAssociation association, SalesOrder salesOrder, Double value){
         Double totalAmount = 0.0;
         Double valueInvoiced = 0.0;
         for (InvoiceSalesOrderAssociation as : associations) {

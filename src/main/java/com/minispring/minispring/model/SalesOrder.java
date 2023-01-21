@@ -1,16 +1,20 @@
 package com.minispring.minispring.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Set;
 @Table(name="salesOrder")
-public class SalesOrder extends Order{
+@Getter
+@Setter
+@AllArgsConstructor
+public class SalesOrder extends Order implements Serializable {
+    private static final Long serialVersionUID = 1L;
     public static final String OBJECT_TYPE = "SALES_ORDER";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,63 +35,6 @@ public class SalesOrder extends Order{
 
     public SalesOrder(){}
 
-    public SalesOrder(BigDecimal amount, Currency currency, SalesOrderState state, SalesOrderStatus status,
-                      InternalPaymentInstruction instruction, Set<InvoiceSalesOrderAssociation> invoiceSalesOrderAssociations) {
-        this.amount = amount;
-        this.currency = currency;
-        this.state = state;
-        this.status = status;
-        this.instruction = instruction;
-        this.invoiceSalesOrderAssociations = invoiceSalesOrderAssociations;
-    }
-
-    public SalesOrderState getState() {
-        return state;
-    }
-
-    public void setState(SalesOrderState state) {
-        this.state = state;
-    }
-
-    public SalesOrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(SalesOrderStatus status) {
-        this.status = status;
-    }
-
-    public InternalPaymentInstruction getInstruction() {
-        return instruction;
-    }
-
-    public void setInstruction(InternalPaymentInstruction instruction) {
-        this.instruction = instruction;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
-
-    public Set<InvoiceSalesOrderAssociation> getInvoiceSalesOrderAssociations() {
-        return invoiceSalesOrderAssociations;
-    }
-
-    public void setInvoiceSalesOrderAssociations(Set<InvoiceSalesOrderAssociation> invoiceSalesOrderAssociations) {
-        this.invoiceSalesOrderAssociations = invoiceSalesOrderAssociations;
-    }
 
     @Override
     public String toString() {

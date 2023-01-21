@@ -1,5 +1,9 @@
 package com.minispring.minispring.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -7,132 +11,44 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Currency;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name="Boleto")
+@Getter
+@Setter
+@AllArgsConstructor
 public class Boleto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "amount", nullable = true)
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
+    @Column(name="bankReferenece",nullable = false)
     private String bankReference;
+    @Column(name="barcode",nullable = false)
     private String barCode;
+    @Column(name="currency",nullable = false)
     private Currency currency;
+    @Column(name="date",nullable = true)
     private LocalDateTime date;
+    @Column(name="documentReference",nullable = false)
     private String documentReference;
+    @Column(name="dueDate",nullable = true)
     private LocalDateTime dueDate;
+    @Column(name="externalReference",nullable = false)
     private String externalReference;
+    @Column(name="paidAmount",nullable = false)
     private BigDecimal paidAmount;
+    @Column(name="paidDate",nullable = false)
     private LocalDate paidDate;
+    @Column(name="state",nullable = false)
     private BoletoState state;
+    private NegotiableInstrument negotiableInstrument;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getBankReference() {
-        return bankReference;
-    }
-
-    public void setBankReference(String bankReference) {
-        this.bankReference = bankReference;
-    }
-
-    public String getBarCode() {
-        return barCode;
-    }
-
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public String getDocumentReference() {
-        return documentReference;
-    }
-
-    public void setDocumentReference(String documentReference) {
-        this.documentReference = documentReference;
-    }
-
-    public LocalDateTime getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(LocalDateTime dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public String getExternalReference() {
-        return externalReference;
-    }
-
-    public void setExternalReference(String externalReference) {
-        this.externalReference = externalReference;
-    }
-
-    public BigDecimal getPaidAmount() {
-        return paidAmount;
-    }
-
-    public void setPaidAmount(BigDecimal paidAmount) {
-        this.paidAmount = paidAmount;
-    }
-
-    public LocalDate getPaidDate() {
-        return paidDate;
-    }
-
-    public void setPaidDate(LocalDate paidDate) {
-        this.paidDate = paidDate;
-    }
-
-   /* public NegotiableInstrument getNegotiableInstrument() {
-        return negotiableInstrument;
-    }
-
-    public void setNegotiableInstrument(NegotiableInstrument negotiableInstrument) {
-        this.negotiableInstrument = negotiableInstrument;
-    }
-*/
-    public BoletoState getState() {
-        return state;
-    }
-
-    public void setState(BoletoState state) {
-        this.state = state;
-    }
-
+    public Boleto(){};
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -159,7 +75,7 @@ public class Boleto {
                 ", externalReference='" + externalReference + '\'' +
                 ", paidAmount=" + paidAmount +
                 ", paidDate=" + paidDate +
-               /* ", negotiableInstrument=" + negotiableInstrument +*/
+                ", negotiableInstrument=" + negotiableInstrument +
                 ", state=" + state +
                 '}'+"\n";
     }
