@@ -2,7 +2,9 @@ package com.minispring.minispring.controller;
 
 import com.minispring.minispring.exception.ValidateException;
 import com.minispring.minispring.model.SalesOrder;
+import com.minispring.minispring.usecase.CloseSalesOrder;
 import com.minispring.minispring.usecase.CreateSalesOrders;
+import com.minispring.minispring.usecase.ProcessSalesOrder;
 import com.minispring.minispring.usecase.RetrieveSalesOrders;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,9 @@ import java.util.Optional;
 public class DefaultSalesOrderController implements SalesOrderController{
     private final CreateSalesOrders createSalesOrders;
     private final RetrieveSalesOrders retrieveSalesOrders;
+    private final ProcessSalesOrder processSalesOrder;
+
+    private final CloseSalesOrder closeSalesOrder;
 
 
     @Override
@@ -38,23 +43,21 @@ public class DefaultSalesOrderController implements SalesOrderController{
     }
 
 
-    @Override
-    public SalesOrder cancelSalesOrder(Long salesOrderId) {
-        return null;
-    }
+
 
     @Override
     public SalesOrder updateSalesOrder(Long salesOrderId, SalesOrder salesOrder) {
+
         return null;
     }
 
     @Override
-    public SalesOrder closeSalesOrder(Long salesOrderId) {
-        return null;
+    public ResponseEntity<SalesOrder> closeSalesOrder(Long salesOrderId) {
+        return new ResponseEntity<>(this.closeSalesOrder.execute(salesOrderId),HttpStatus.PROCESSING);
     }
 
     @Override
-    public SalesOrder processSalesOrder(Long salesOrderId) {
-        return null;
+    public  ResponseEntity<SalesOrder> processSalesOrder(Long salesOrderId) {
+        return new ResponseEntity<>(this.processSalesOrder.execute(salesOrderId),HttpStatus.PROCESSING);
     }
 }

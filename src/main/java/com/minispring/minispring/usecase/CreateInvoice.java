@@ -26,6 +26,7 @@ public class CreateInvoice {
     private SalesOrderRepository salesOrderRepository;
     @Autowired
     private InvoiceSalesOrderAssociationRepository invoiceSalesOrderAssociationRepository;
+    private SalesOrder salesOrder = new SalesOrder();
 
     public Invoice execute(Invoice invoice) {
         this.validateInvoice(invoice);
@@ -39,6 +40,7 @@ public class CreateInvoice {
             invoice.getNegotiableInstruments().get(0).setDueDate(invoice.getDueDate().plusDays(30));
         }
         Invoice invoice1 = invoiceRepository.save(invoice);
+        this.createAssociation(invoice,this.salesOrder);
         return invoice1;
     }
 
@@ -109,23 +111,36 @@ public class CreateInvoice {
     }
 
     private void validateAmountInvoiced(Invoice invoice){
+         salesOrder = new SalesOrder();
         if(invoice.getExternalReference() != null){
-            Optional<SalesOrder> salesOrders= Optional.of(salesOrderRepository.find
-            if(salesOrders.isEmpty() || salesOrders.equals(null)){
-                throw new ExternalReferenceNotFoundException(invoice.getExternalReference());
+            List<SalesOrder> salesOrders= salesOrderRepository.findAll().stream().toList();
+
+            Boolean isValidExternal = false;
+            for(SalesOrder sl: salesOrders){
+                if(sl.getExternalReference() != null){
+                    if(sl.getExternalReference().equals(invoice.getExternalReference())){
+                        salesOrder= sl;
+                        isValidExternal = true;
+                    }
+                }
+
             }
-            else{
-                InvoiceSalesOrderAssociation association= this.createAssociation(invoice,salesOrders.get());
-                BigDecimal invoiceAmount = association.getInvoice().getAmount();
-                BigDecimal salesOrderAmount =association.getSalesOrder().getAmount();
+          if(!isValidExternal){
+              throw new ExternalReferenceNotFoundException(invoice.getExternalReference());
+          }
+
+            }
+
+
+                BigDecimal invoiceAmount = invoice.getAmount();
+                BigDecimal salesOrderAmount =salesOrder.getAmount();
                 if(invoiceAmount.compareTo(salesOrderAmount) == 1 ){
-                    association.getInvoice().setStatus(ExternalPaymentInstructionStatus.EXECUTED);
+                   invoice.setStatus(ExternalPaymentInstructionStatus.EXECUTED);
                 }
                 else{
-                    association.getInvoice().setStatus(ExternalPaymentInstructionStatus.CANCELED);
+                    invoice.setStatus(ExternalPaymentInstructionStatus.CANCELED);
                     throw new ValueGreaterThanAmountException("Invoice amount is greater than Sales order amount ");
-                }
-            }
+
         }
 
 
@@ -133,102 +148,10 @@ public class CreateInvoice {
 
     private InvoiceSalesOrderAssociation createAssociation(Invoice invoice,SalesOrder salesOrder){
         InvoiceSalesOrderAssociation association = new InvoiceSalesOrderAssociation();
-        association.setInvoice(invoice);
-        association.setSalesOrder(salesOrder);
         association.setAmount(invoice.getAmount());
         association.setDate(LocalDateTime.now());
         invoiceSalesOrderAssociationRepository.save(association);
         return association;
     }
-
-   /* public void execute(Set<SalesOrder> salesOrders, InstructionInvolvement obligor, InstructionInvolvement obligee) {
-        SalesOrder currentSalesOrder = new SalesOrder();
-        String invoiceSelected = "";
-        if (salesOrders != null) {
-            Boolean faturarNovamente = true;
-            while (faturarNovamente) {
-                System.out.println("\n\nDigite qual pedido deseja faturar:");
-                invoiceSelected = scan.nextLine();
-                Boolean salesOrderExist = false;
-                for (SalesOrder sl : salesOrders) {
-                    if (sl.getExternalReference().equals(invoiceSelected)) {
-                        System.out.println("Pedido encontrado!");
-                        System.out.println(sl);
-                        currentSalesOrder = sl;
-                        salesOrderExist = true;
-                    }
-                }
-                if (!salesOrderExist) {
-                    System.out.println("Pedido não foi encontrado! Tente novamente.");
-
-                } else {
-                    System.out.println("Valor a ser faturado:");
-                    Double value = scan.nextDouble();
-                    scan.nextLine();
-                    try {
-                        discountCreditInstructionInvolvement.execute(obligee, value);
-                        System.out.println("Quatidade de parcelas:");
-                        Integer qtdParcels = scan.nextInt();
-                        Double discountAmount = value / qtdParcels;
-                        Invoice invoice = new Invoice();
-                        invoice.setDate(LocalDateTime.now());
-                        invoice.setAmount(BigDecimal.valueOf(value));
-                        invoice.setCurrency(Currency.getInstance("BRL"));
-                        invoice.setExternalReference(invoiceSelected);
-                        int plusDays= 3;
-                        for (int i = 1; i <= qtdParcels; i++) {
-                            plusDays+=3;
-                            String documentReference = "urn:reference:" + (int) Math.floor(Math.random() * (999999 - 111111 + 1) + 111111);
-                            LocalDateTime dueDate = LocalDateTime.now().plusDays(3);
-                            NegotiableInstrument negotiable = createNegotiableInstrument.execute(null, documentReference, BigDecimal.valueOf(discountAmount), dueDate.plusDays(plusDays));
-                            negotiableInstruments.add(negotiable);
-                            Boleto boleto = createBoleto.execute(negotiable);
-                            boleto.setBarCode(String.valueOf(1727183193 + (Math.floor(Math.random() * (999999999 - 1111111111 + 1) + 1111111111))));
-                            negotiable.setBoleto(boleto);
-
-                        }
-
-                        invoice.setNegotiableInstruments(negotiableInstruments);
-                        InvoiceSalesOrderAssociation association = createInvoiceSalesOrderAssociation.execute(invoice, currentSalesOrder);
-                        addInvoiceSalesOrderAssociation.execute(associations, salesOrders, association, currentSalesOrder, value);
-
-                        CalculateSalesOrder calculateSalesOrder = new CalculateSalesOrder();
-                        Double valueReturned = calculateSalesOrder.execute(currentSalesOrder, salesOrders, invoiceSelected);
-
-                        calculateInvoice.execute(valueReturned, obligee, currentSalesOrder);
-                        System.out.println("Obligor credit limit: R$ " + obligee.getCreditLimit());
-                        if (obligor.getConfiguration().getSingleInvoicing()) {
-                            faturarNovamente = false;
-                            System.out.println("Pedido faturado com Sucesso!");
-                        } else {
-                            scan.nextLine();
-                            System.out.println("Deseja sair? S/N");
-                            String fazerOutroPedido = scan.nextLine();
-                            if (fazerOutroPedido.equalsIgnoreCase("S")) {
-                                System.out.println(obligee.getSalesOrders());
-                                System.out.println(currentSalesOrder);
-                                System.out.println(currentSalesOrder.getInvoiceSalesOrderAssociations());
-                                for(NegotiableInstrument ni: negotiableInstruments){
-                                    System.out.println(ni);
-                                }
-                                System.out.println("EC limit: R$" + obligee.getCreditLimit());
-                                faturarNovamente = false;
-                            } else if (fazerOutroPedido.equalsIgnoreCase("N")) {
-                                faturarNovamente = true;
-                                System.out.println("Pedido efetuado com sucesso!");
-                                for (SalesOrder sl : salesOrders) {
-                                    System.out.println(sl);
-                                }
-                            } else {
-                                System.out.println("Opção inválida! Digite 'S' para fazer outro\npedido, e'N' para sair. ");
-                            }
-
-                        }
-                    } catch (ValueGreaterThanAmountException e) {
-                        System.out.println(e.getMessage());
-                    } catch (ValueGreaterThanLimitException e) {
-                        System.out.println(e.g*//*etMessage());
-                    }*/
-
 
 }

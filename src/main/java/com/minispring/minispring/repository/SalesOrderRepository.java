@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SalesOrderRepository extends JpaRepository<SalesOrder,Long> {
-    @Query("select * from salesOrder where externalReference = ?")
+
     SalesOrder findByExternalReference(String external);
 }
