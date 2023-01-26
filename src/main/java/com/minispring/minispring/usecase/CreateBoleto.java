@@ -1,6 +1,6 @@
 package com.minispring.minispring.usecase;
 
-import com.minispring.minispring.controller.CreateBoletoController;
+
 import com.minispring.minispring.model.Boleto;
 import com.minispring.minispring.model.BoletoState;
 import com.minispring.minispring.model.NegotiableInstrument;

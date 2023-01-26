@@ -1,35 +1,34 @@
 package com.minispring.minispring.controller;
 
+import com.minispring.minispring.exception.ValidateException;
 import com.minispring.minispring.model.SalesOrder;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
+@Controller
 public interface SalesOrderController {
-    @GetMapping(path = "/api/v1/sales-orders")
-    Page<SalesOrder> retrieveSalesOrders(Pageable pageable, Optional<Predicate> filter,
-                                         @RequestParam("$expand") Optional<String> expand);
+    @GetMapping(path = "/sales-orders")
+    List<SalesOrder> retrieveSalesOrders();
 
-    @GetMapping(path = "/api/v1/sales-orders/{salesOrderId}")
-    Optional<SalesOrder> retrieveSalesOrder(@PathVariable Long salesOrderId,
-                                            @RequestParam("$expand") Optional<String> expand);
+    @GetMapping(path = "sales-orders/{salesOrderId}")
+    ResponseEntity<Optional<SalesOrder>> retrieveSalesOrder(@PathVariable Long salesOrderId);
 
-    @PostMapping(path = "/api/v1/sales-orders")
-    List<SalesOrder> createSalesOrders(@RequestBody List<SalesOrder> salesOrders);
+    @PostMapping(path = "sales-orders")
+    ResponseEntity<SalesOrder> createSalesOrders(@RequestBody SalesOrder salesOrders) throws ValidateException;
 
-    @PutMapping(path = "/api/v1/sales-orders/{salesOrderId}/cancel")
+    @PutMapping(path = "sales-orders/{salesOrderId}/cancel")
     SalesOrder cancelSalesOrder(@PathVariable Long salesOrderId);
 
-    @PutMapping(path = "/api/v1/sales-orders/{salesOrderId}")
+    @PutMapping(path = "sales-orders/{salesOrderId}")
     SalesOrder updateSalesOrder(@PathVariable Long salesOrderId, @RequestBody SalesOrder salesOrder);
 
-    @PutMapping(path = "/api/v1/sales-orders/{salesOrderId}/close")
+    @PutMapping(path = "sales-orders/{salesOrderId}/close")
     SalesOrder closeSalesOrder(@PathVariable Long salesOrderId);
 
-    @PutMapping(path = "/api/v1/sales-orders/{salesOrderId}/process")
+    @PutMapping(path = "sales-orders/{salesOrderId}/process")
     SalesOrder processSalesOrder(@PathVariable Long salesOrderId);
 }

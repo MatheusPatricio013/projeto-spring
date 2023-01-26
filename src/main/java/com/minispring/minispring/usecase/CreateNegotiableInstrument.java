@@ -12,7 +12,6 @@ public class CreateNegotiableInstrument {
 
     public NegotiableInstrument execute(Boleto boleto, String documentReference, BigDecimal discountAmount, LocalDateTime dueDate){
         NegotiableInstrument negotiableInstrument = new NegotiableInstrument();
-        negotiableInstrument.setDate(LocalDateTime.now());
         negotiableInstrument.setAmount(discountAmount);
         negotiableInstrument.setDocumentReference(documentReference);
         negotiableInstrument.setCurrency(Currency.getInstance("BRL"));

@@ -1,12 +1,14 @@
 package com.minispring.minispring.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Currency;
@@ -18,7 +20,9 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Boleto {
+@Builder
+public class Boleto implements Serializable{
+    private static final Long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -26,14 +30,14 @@ public class Boleto {
     private Long id;
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
-    @Column(name="bankReferenece",nullable = false)
+    @Column(name="bankReference",nullable = false)
     private String bankReference;
-    @Column(name="barcode",nullable = false)
+    @Column(name="barCode",nullable = false)
     private String barCode;
     @Column(name="currency",nullable = false)
     private Currency currency;
     @Column(name="date",nullable = true)
-    private LocalDateTime date;
+    private Timestamp date;
     @Column(name="documentReference",nullable = false)
     private String documentReference;
     @Column(name="dueDate",nullable = true)
@@ -43,9 +47,11 @@ public class Boleto {
     @Column(name="paidAmount",nullable = false)
     private BigDecimal paidAmount;
     @Column(name="paidDate",nullable = false)
-    private LocalDate paidDate;
+    private LocalDateTime paidDate;
     @Column(name="state",nullable = false)
     private BoletoState state;
+
+    @OneToOne
     private NegotiableInstrument negotiableInstrument;
 
     public Boleto(){};
@@ -75,7 +81,7 @@ public class Boleto {
                 ", externalReference='" + externalReference + '\'' +
                 ", paidAmount=" + paidAmount +
                 ", paidDate=" + paidDate +
-                ", negotiableInstrument=" + negotiableInstrument +
+
                 ", state=" + state +
                 '}'+"\n";
     }

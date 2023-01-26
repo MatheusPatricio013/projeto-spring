@@ -1,50 +1,33 @@
 package com.minispring.minispring.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Currency;
 
+@Getter
+@Setter
+
 public class Order {
     public static final String OBJECT_TYPE = "ORDER";
+    @Id
+    @GeneratedValue
     private Long id;
     private String customerReference;
-    private LocalDateTime date;
-    private String externalReference;
-    private Currency currency;
-    private BigDecimal amount;
 
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getCustomerReference() {
-        return customerReference;
-    }
 
-    public void setCustomerReference(String customerReference) {
-        this.customerReference = customerReference;
-    }
 
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public String getExternalReference() {
-        return externalReference;
-    }
-
-    public void setExternalReference(String externalReference) {
-        this.externalReference = externalReference;
-    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

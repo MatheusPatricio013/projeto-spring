@@ -19,8 +19,9 @@ public class CreateBoletoController {
     @PostMapping(path = "/criarBoleto")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody  Boleto criarBoleto(@RequestBody Boleto boleto) throws JsonProcessingException {
-        boletoRepository.save(boleto);
-        return boleto;
+
+        Boleto boletoSalvo =boletoRepository.save(boleto);
+        return boletoSalvo;
     }
 
 

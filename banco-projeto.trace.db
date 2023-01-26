@@ -1,0 +1,6 @@
+2023-01-22 23:47:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOLETO" not found (this database is empty); SQL statement:
+select boleto0_.id as id1_0_, boleto0_.amount as amount2_0_, boleto0_.bank_reference as bank_ref3_0_, boleto0_.bar_code as bar_code4_0_, boleto0_.currency as currency5_0_, boleto0_.date as date6_0_, boleto0_.document_reference as document7_0_, boleto0_.due_date as due_date8_0_, boleto0_.external_reference as external9_0_, boleto0_.paid_amount as paid_am10_0_, boleto0_.paid_date as paid_da11_0_, boleto0_.state as state12_0_ from boleto boleto0_ [42104-214]
+2023-01-22 23:51:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOLETO" not found (this database is empty); SQL statement:
+select boleto0_.id as id1_0_, boleto0_.amount as amount2_0_, boleto0_.bank_reference as bank_ref3_0_, boleto0_.bar_code as bar_code4_0_, boleto0_.currency as currency5_0_, boleto0_.date as date6_0_, boleto0_.document_reference as document7_0_, boleto0_.due_date as due_date8_0_, boleto0_.external_reference as external9_0_, boleto0_.paid_amount as paid_am10_0_, boleto0_.paid_date as paid_da11_0_, boleto0_.state as state12_0_ from boleto boleto0_ [42104-214]

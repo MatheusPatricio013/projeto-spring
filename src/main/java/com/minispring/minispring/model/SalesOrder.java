@@ -1,24 +1,26 @@
 package com.minispring.minispring.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Currency;
 import java.util.Set;
 @Table(name="salesOrder")
 @Getter
 @Setter
+@Entity
+@Builder
 @AllArgsConstructor
 public class SalesOrder extends Order implements Serializable {
     private static final Long serialVersionUID = 1L;
     public static final String OBJECT_TYPE = "SALES_ORDER";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     private Long id;
     @Column (name="amount")
     private BigDecimal amount;
@@ -28,9 +30,15 @@ public class SalesOrder extends Order implements Serializable {
     private SalesOrderState state;
     @Column(name="status")
     private SalesOrderStatus status;
+    @Column(name="externalReference")
+    private String externalReference;
+    @CreatedDate
+    @Column(name="createdDate",columnDefinition = "TIMESTAMP")
+    private Timestamp createdDate;
+
 
     private InternalPaymentInstruction instruction;
-
+@OneToMany
     private Set<InvoiceSalesOrderAssociation> invoiceSalesOrderAssociations;
 
     public SalesOrder(){}

@@ -1,0 +1,9 @@
+2023-01-25 20:11:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]order (dtype varchar(31) not null, id bigint not null, created_date TIMESTAMP, customer_reference varchar(255), external_reference varchar(255), amount numeric(19,2), currency varchar(255), instruction varbinary(255), state integer, status integer, primary key (id))"; expected "identifier"; SQL statement:
+create table order (dtype varchar(31) not null, id bigint not null, created_date TIMESTAMP, customer_reference varchar(255), external_reference varchar(255), amount numeric(19,2), currency varchar(255), instruction varbinary(255), state integer, status integer, primary key (id)) [42001-214]
+2023-01-25 20:11:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table invoice_association add constraint FK1f3m8x4mkjorni6wr3bepvc7j foreign key (sales_order_id) references [*]order"; expected "identifier"; SQL statement:
+alter table invoice_association add constraint FK1f3m8x4mkjorni6wr3bepvc7j foreign key (sales_order_id) references order [42001-214]
+2023-01-25 20:11:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table order_invoice_sales_order_associations add constraint FKqk64scryxq4xq4e3hj486vtkb foreign key (sales_order_id) references [*]order"; expected "identifier"; SQL statement:
+alter table order_invoice_sales_order_associations add constraint FKqk64scryxq4xq4e3hj486vtkb foreign key (sales_order_id) references order [42001-214]

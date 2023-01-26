@@ -1,28 +1,24 @@
 package com.minispring.minispring.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Currency;
-
+@Entity
+@Getter
+@Setter
 public class FinancialInstruction extends Instruction {
     public static final String OBJECT_TYPE = "FINANCIAL_INSTRUCTION";
+    @Column(name="amount")
     private BigDecimal amount;
+    @Column(name="currency")
     private Currency currency;
 
-    public BigDecimal getAmount() {
-        return amount;
-    }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
 
     @Override
     public boolean equals(Object o) {

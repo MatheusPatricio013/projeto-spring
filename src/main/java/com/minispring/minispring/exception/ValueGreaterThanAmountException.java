@@ -2,6 +2,6 @@ package com.minispring.minispring.exception;
 
 public class ValueGreaterThanAmountException extends  RuntimeException{
     public ValueGreaterThanAmountException(String msg){
-        super(msg);
+        super(msg,null,true,false);
     }
 }
