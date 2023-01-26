@@ -1,5 +1,6 @@
 package com.minispring.minispring.usecase;
-import com.minispring.minispring.exception.ValueGreaterThanAmountException;
+
+import com.minispring.minispring.exception.ValueDifferentThanAmountException;
 import com.minispring.minispring.model.InvoiceSalesOrderAssociation;
 import com.minispring.minispring.model.SalesOrder;
 
@@ -18,7 +19,7 @@ public class AddInvoiceSalesOrderAssociation {
             totalAmount += sl.getAmount().doubleValue();
         }
         if(value > totalAmount){
-            throw new ValueGreaterThanAmountException("Value is greater than amount!");
+            throw new ValueDifferentThanAmountException("Value is greater than amount!");
         }else {
             associations.add(association);
             salesOrder.setInvoiceSalesOrderAssociations(associations);

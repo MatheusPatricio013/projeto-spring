@@ -9,6 +9,7 @@ import com.minispring.minispring.usecase.RetrieveSalesOrders;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -26,17 +27,20 @@ public class DefaultSalesOrderController implements SalesOrderController{
 
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public List<SalesOrder> retrieveSalesOrders() {
 
         return retrieveSalesOrders.execute();
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Optional<SalesOrder>> retrieveSalesOrder(Long salesOrderId) {
         return new ResponseEntity<>(retrieveSalesOrders.execute(salesOrderId),HttpStatus.FOUND);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<SalesOrder> createSalesOrders( SalesOrder salesOrders) throws ValidateException {
 
         return new ResponseEntity<>(createSalesOrders.execute(salesOrders),HttpStatus.CREATED);
@@ -57,6 +61,7 @@ public class DefaultSalesOrderController implements SalesOrderController{
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public  ResponseEntity<SalesOrder> processSalesOrder(Long salesOrderId) {
         return new ResponseEntity<>(this.processSalesOrder.execute(salesOrderId),HttpStatus.PROCESSING);
     }

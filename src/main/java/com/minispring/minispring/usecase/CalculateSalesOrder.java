@@ -1,6 +1,7 @@
 package com.minispring.minispring.usecase;
 
-import com.minispring.minispring.exception.ValueGreaterThanAmountException;
+
+import com.minispring.minispring.exception.ValueDifferentThanAmountException;
 import com.minispring.minispring.model.InvoiceSalesOrderAssociation;
 import com.minispring.minispring.model.SalesOrder;
 
@@ -24,7 +25,7 @@ public class CalculateSalesOrder {
 
         }
         if(valueInvoiced > totalAmount){
-            throw  new ValueGreaterThanAmountException("Value invoiced greater than amount!");
+            throw  new ValueDifferentThanAmountException("Value invoiced greater than amount!");
         }
         else {
 

@@ -134,12 +134,12 @@ public class CreateInvoice {
 
                 BigDecimal invoiceAmount = invoice.getAmount();
                 BigDecimal salesOrderAmount =salesOrder.getAmount();
-                if(invoiceAmount.compareTo(salesOrderAmount) == 1 ){
+                if(invoiceAmount.compareTo(salesOrderAmount) == 0 ){
                    invoice.setStatus(ExternalPaymentInstructionStatus.EXECUTED);
                 }
                 else{
                     invoice.setStatus(ExternalPaymentInstructionStatus.CANCELED);
-                    throw new ValueGreaterThanAmountException("Invoice amount is greater than Sales order amount ");
+                    throw new ValueDifferentThanAmountException("Invoice different than Sales order amount ");
 
         }
 
